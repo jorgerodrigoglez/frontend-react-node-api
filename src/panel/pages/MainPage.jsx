@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CalendarIcon } from '@heroicons/react/24/solid';
 import { useAnuncioStore, useAuthStore } from "../../hooks";
@@ -5,9 +6,15 @@ import { useAnuncioStore, useAuthStore } from "../../hooks";
 export const MainPage = () => {
 
   // hook - 
-  const{ anuncios, setActiveAnuncio } = useAnuncioStore();
-  // hook - 
   const { startLogout, user } = useAuthStore();
+  // hook - 
+  const{ anuncios, setActiveAnuncio, startLoadingUserAnuncios } = useAnuncioStore();
+
+  // efecto para cargar el listado de anuncios que vienen de DDBB
+  useEffect(() => {
+    startLoadingUserAnuncios();
+  }, [user]);
+  
 
   return (
     <div className="bg-white flex flex-col items-center">
@@ -38,9 +45,9 @@ export const MainPage = () => {
       {/* Todo: Muestra anuncios del store / activa el anuncio sobre el que se hace click */}
 
         {
-          anuncios.map(anuncio => (
+          anuncios.map( anuncio => (
             <div 
-              key={anuncio._id} 
+              key={anuncio.id} 
         
             >
               <h1 className="text-4xl text-center py-2">{anuncio.title}</h1>

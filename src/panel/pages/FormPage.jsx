@@ -101,6 +101,11 @@ export const FormPage = () => {
               >
                 Borrar
               </button>
+              <button
+                className="bg-red-900 p-2 mt-2 rounded w-36"
+              >
+                Cancelar
+              </button>
             </>
           : <button className="bg-blue-500 p-2 mt-2 rounded w-36">Guardar</button>
         }
